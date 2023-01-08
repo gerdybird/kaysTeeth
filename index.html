@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>kay's teeth</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../styles/sub.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+	<style>
+	body{
+		background-color:#e6dbca;
+		background-image: url('assets/friends/mouth.jpg');
+  		background-repeat: no-repeat;
+  		background-size: cover;
+	}
+	.canvas{
+		width:1200px;
+	    height:670px;
+	}
+	#container{
+		position:absolute;
+		/*border:2px solid black;*/
+	    top: 50%;
+	    left: 50%;
+	    margin-top: 100px; /* Half the height */
+	    margin-left: -700px;
+	}
+	#library{
+		position:absolute;
+	}
+	#roro{
+		position:absolute;
+		left:949px;
+		top:171px;
+	}
+	#shelf{
+		position:absolute;
+		left:240px;
+		top:100px;
+		/*border:2px solid black;*/
+		width:1570px;
+		height:300px;
+	}
+	#shelf img{
+		margin-bottom:80px;
+		height:60px;
+		margin-left:3px;
+	}
+	#viewer{
+		position:absolute;
+		display:none;
+	}
+	#viewer img{
+		display:none;
+		height:60%;
+		margin:auto;
+		margin-top:50px;
+	}
+	#author{
+		/*border:2px solid black;*/
+	}
+	</style>
+</head>
+<body>
+	<div id="container" class="canvas">
+	<!-- 	<img id="library" class="room" src="assets/oldLibrary/library-inside2.png"> -->
+		<div id="shelf" class="">
+		</div>
+		<p id="author"></p>
+		<!-- <img id="roro" class="draggable" src="assets/oldLibrary/roro2.png"> -->
+		<div id="viewer" class="canvas">
+		</div>
+	</div>
+
+	<a href="https://drive.google.com/drive/folders/1_WQmbxdPxoDqFZDURe56t2ljIbLM-jIK?usp=share_link"><img style="width:20px; left: 874px; top: 287px;" class="draggable" src="assets/friends/cd.gif"></a>
+	
+</body>
+<script>
+	var booklength=16;
+	
+	for (var i=1;i<=booklength;i++){
+	document.getElementById('shelf').innerHTML+=
+	'<img class="draggable book" src="assets/friendsLibrary/'+i+'.png">'
+	}
+	for (var i=1;i<=booklength;i++){
+	document.getElementById('viewer').innerHTML+=
+	'<img class="draggable openbook" src="assets/friendsLibrary/'+i+'o.png">'
+	}
+	for (var i=1;i<=booklength;i++){
+	document.getElementById('shelf').innerHTML+=
+	'<audio class="sound" src="assets/friendsLibrary/'+i+'.mp3"></audio>'
+	}
+
+	var shelf = document.getElementById('shelf');
+	var viewer = document.getElementById('viewer');
+
+	var sounds=shelf.querySelectorAll(".sound");
+	var books=shelf.querySelectorAll(".book");
+	var openbooks=viewer.querySelectorAll(".openbook");
+	var viewer=document.getElementById('viewer');
+
+	var data = ["Joe","Ben","Daline", "Joshua", "Kaius", "Lumen and Hannah", "Maya", "Theia", "Libby", "Grace", "Taylor", "Diego", "Phil", "Cherry", "Henry", "Maria <3"];
+
+	var bookCounter=0;
+	for (let i=0;i<booklength;i++){
+		books[i].addEventListener('dblclick', function(){
+			if (bookCounter==0){
+				sounds[i].play();
+				viewer.style.display='block';
+				openbooks[i].style.display='block';
+				document.title = data[i];
+				// console.log(data[1]);
+				bookCounter++;
+			}
+		});
+	}
+	for (let i=0;i<books.length;i++){
+		openbooks[i].addEventListener('dblclick', function(){
+			if (bookCounter==1){
+				sounds[i].pause();
+				viewer.style.display='none';
+				openbooks[i].style.display='none';
+				bookCounter=0;
+			}
+		});
+	}
+
+</script>
+<script type="text/javascript" src="scripts/draggable.js"></script>
+<script type="text/javascript" src="scripts/sub.js"></script>
+</html>
